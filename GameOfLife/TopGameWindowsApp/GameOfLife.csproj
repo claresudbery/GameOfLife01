@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tests\GameOfLifeTestHelpers.cs" />
     <Compile Include="Tests\GameOfLifeTests.cs">
       <SubType>Code</SubType>
     </Compile>
