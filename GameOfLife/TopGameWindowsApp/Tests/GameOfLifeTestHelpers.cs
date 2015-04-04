@@ -98,33 +98,33 @@ namespace GameOfLife.Tests
             }
         }
 
-        private void TestAllCombinationsOfNeighbours(int numLiveNeighbours, Action successJudger)
+        private void TestAllTypesOfCellPosition(int numLiveNeighbours, Action successJudger)
         {
-            GamePosition gamePosition = GetCornerCell();
-            if (gamePosition.NumNeighbours >= numLiveNeighbours)
+            GamePosition cornerCell = GetCornerCell();
+            if (cornerCell.NumNeighbours >= numLiveNeighbours)
             {
-                TestParticularCombinationOfNeighbours(
+                TestParticularCellPosition(
                     numLiveNeighbours,
-                    gamePosition,
+                    cornerCell,
                     successJudger);
             }
 
-            gamePosition = GetEdgeCell();
-            if (gamePosition.NumNeighbours >= numLiveNeighbours)
+            GamePosition edgeCell = GetEdgeCell();
+            if (edgeCell.NumNeighbours >= numLiveNeighbours)
             {
-                TestParticularCombinationOfNeighbours(
+                TestParticularCellPosition(
                     numLiveNeighbours,
-                    gamePosition,
+                    edgeCell,
                     successJudger);
             }
 
-            TestParticularCombinationOfNeighbours(
+            TestParticularCellPosition(
                 numLiveNeighbours,
                 GetCentreCell(),
                 successJudger);
         }
 
-        private void TestParticularCombinationOfNeighbours(
+        private void TestParticularCellPosition(
             int numLiveNeighbours,
             GamePosition gamePosition,
             Action successJudger)

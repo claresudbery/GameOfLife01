@@ -17,7 +17,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithAllDeadNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 0,
                 successJudger: CellShouldDie);
         }
@@ -26,7 +26,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithOneLiveNeighbourAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 1,
                 successJudger: CellShouldDie);
         }
@@ -35,7 +35,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithTwoLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellSurvives()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 2,
                 successJudger: CellShouldSurvive);
         }
@@ -44,7 +44,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithThreeLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellSurvives()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 3,
                 successJudger: CellShouldSurvive);
         }
@@ -53,7 +53,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithFourLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 4,
                 successJudger: CellShouldDie);
         }
@@ -62,7 +62,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithFiveLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 5,
                 successJudger: CellShouldDie);
         }
@@ -71,7 +71,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithSixLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 6,
                 successJudger: CellShouldDie);
         }
@@ -80,7 +80,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithSevenLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 7,
                 successJudger: CellShouldDie);
         }
@@ -89,7 +89,7 @@ namespace GameOfLife.Tests
         public void GivenALiveCellWithEightLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 8,
                 successJudger: CellShouldDie);
         }
@@ -98,7 +98,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithAllDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 0,
                 successJudger: CellShouldStayDead);
         }
@@ -107,7 +107,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithOneLiveNeighbourAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 1,
                 successJudger: CellShouldStayDead);
         }
@@ -116,7 +116,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithTwoLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 2,
                 successJudger: CellShouldStayDead);
         }
@@ -125,7 +125,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithThreeLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellRegenerates()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 3,
                 successJudger: CellShouldRegenerate);
         }
@@ -134,7 +134,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithFourLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 4,
                 successJudger: CellShouldStayDead);
         }
@@ -143,7 +143,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithFiveLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 5,
                 successJudger: CellShouldStayDead);
         }
@@ -152,7 +152,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithSixLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 6,
                 successJudger: CellShouldStayDead);
         }
@@ -161,7 +161,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithSevenLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 7,
                 successJudger: CellShouldStayDead);
         }
@@ -170,7 +170,7 @@ namespace GameOfLife.Tests
         public void GivenADeadCellWithEightLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
         {
             _survivalState = Survival.Dead;
-            TestAllCombinationsOfNeighbours(
+            TestAllTypesOfCellPosition(
                 numLiveNeighbours: 8,
                 successJudger: CellShouldStayDead);
         }
