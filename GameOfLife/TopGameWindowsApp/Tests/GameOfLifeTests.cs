@@ -283,12 +283,11 @@ namespace GameOfLife.Tests
                 Position = new Point(xCoordinate,
                                     yCoordinate),
                 Neighbours = new List<Point>
-                {new Point(xCoordinate - 1,
-                            yCoordinate - 1),
-                new Point(xCoordinate,
-                            yCoordinate - 1),
-                new Point(xCoordinate - 1,
-                            yCoordinate)}
+                {
+                    AboveAndToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyAbove(xCoordinate, yCoordinate),
+                    DirectlyToTheLeft(xCoordinate, yCoordinate)
+                }
             };
         }
 
@@ -312,16 +311,13 @@ namespace GameOfLife.Tests
                 Position = new Point(xCoordinate,
                                     yCoordinate),
                 Neighbours = new List<Point>
-                    {new Point( xCoordinate - 1,
-                              yCoordinate - 1),
-                     new Point( xCoordinate - 1,
-                              yCoordinate),
-                     new Point( xCoordinate - 1,
-                              yCoordinate + 1),
-                     new Point( xCoordinate,
-                              yCoordinate - 1),
-                     new Point( xCoordinate,
-                              yCoordinate + 1)}
+                {
+                    AboveAndToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyAbove(xCoordinate, yCoordinate),
+                    DirectlyToTheLeft(xCoordinate, yCoordinate),
+                    BelowAndToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyBelow(xCoordinate, yCoordinate)
+                }
             };
         }
 
@@ -335,16 +331,13 @@ namespace GameOfLife.Tests
                 Position = new Point(xCoordinate,
                                     yCoordinate),
                 Neighbours = new List<Point>
-                    {new Point( xCoordinate - 1,
-                              yCoordinate - 1),
-                     new Point( xCoordinate,
-                              yCoordinate - 1),
-                     new Point( xCoordinate + 1,
-                              yCoordinate - 1),
-                     new Point( xCoordinate - 1,
-                              yCoordinate),
-                     new Point( xCoordinate + 1,
-                              yCoordinate)}
+                {
+                    AboveAndToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyAbove(xCoordinate, yCoordinate),
+                    AboveAndToTheRight(xCoordinate, yCoordinate),
+                    DirectlyToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyToTheRight(xCoordinate, yCoordinate)
+                }
             };
         }
 
@@ -362,23 +355,57 @@ namespace GameOfLife.Tests
             {
                 Position = new Point(_gridWidth - 2, _gridHeight - 2),
                 Neighbours = new List<Point>
-                {new Point(xCoordinate - 1,
-                            yCoordinate - 1),
-                new Point(xCoordinate,
-                            yCoordinate - 1),
-                new Point(xCoordinate + 1,
-                            yCoordinate - 1),
-                new Point(xCoordinate - 1,
-                            yCoordinate),
-                new Point(xCoordinate + 1,
-                            yCoordinate),
-                new Point(xCoordinate - 1,
-                            yCoordinate + 1),
-                new Point(xCoordinate,
-                            yCoordinate + 1),
-                new Point(xCoordinate + 1,
-                            yCoordinate + 1)}
+                {
+                    AboveAndToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyAbove(xCoordinate, yCoordinate),
+                    AboveAndToTheRight(xCoordinate, yCoordinate),
+                    DirectlyToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyToTheRight(xCoordinate, yCoordinate),
+                    BelowAndToTheLeft(xCoordinate, yCoordinate),
+                    DirectlyBelow(xCoordinate, yCoordinate),
+                    BelowAndToTheRight(xCoordinate, yCoordinate)
+                }
             };
+        }
+
+        private Point BelowAndToTheRight(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate + 1, yCoordinate + 1);
+        }
+
+        private Point DirectlyBelow(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate, yCoordinate + 1);
+        }
+
+        private Point BelowAndToTheLeft(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate - 1, yCoordinate + 1);
+        }
+
+        private Point DirectlyToTheRight(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate + 1, yCoordinate);
+        }
+
+        private Point DirectlyToTheLeft(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate - 1, yCoordinate);
+        }
+
+        private Point AboveAndToTheRight(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate + 1, yCoordinate - 1);
+        }
+
+        private Point DirectlyAbove(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate, yCoordinate - 1);
+        }
+
+        private Point AboveAndToTheLeft(int xCoordinate, int yCoordinate)
+        {
+            return new Point(xCoordinate - 1, yCoordinate - 1);
         }
     }
 }
