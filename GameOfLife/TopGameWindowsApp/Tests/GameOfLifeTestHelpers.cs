@@ -98,34 +98,82 @@ namespace GameOfLife.Tests
             }
         }
 
-        private void TestAllTypesOfCellPosition(int numLiveNeighbours, Action successJudger)
+        private void AddDeadNonNeighbours(int numNonNeighbours, GamePosition gamePosition)
+        {
+            AddNonNeighbours(numNonNeighbours, Survival.Dead, gamePosition);
+        }
+
+        private void AddLiveNonNeighbours(int numNonNeighbours, GamePosition gamePosition)
+        {
+            AddNonNeighbours(numNonNeighbours, Survival.Alive, gamePosition);
+        }
+
+        private void AddNonNeighbours(
+            int numNonNeighbours,
+            Survival survivalState,
+            GamePosition gamePosition)
+        {
+            for (int count = 1; count <= numNonNeighbours; count++)
+            {
+                Point nonNeighbourPosition = gamePosition.NextNonNeighbour();
+                ICell nonNeighbour = new Cell(survivalState, nonNeighbourPosition.X, nonNeighbourPosition.Y);
+                _cells.Add(nonNeighbour);
+            }
+        }
+
+        private void TestAllTypesOfCellPosition(
+            int numLiveNeighbours,
+            Action successJudger,
+            int numLiveNonNeighbours = 0)
         {
             GamePosition cornerCell = GetCornerCell();
-            if (cornerCell.NumNeighbours >= numLiveNeighbours)
+            bool cornerCellCanBeTested = cornerCell.NumNeighbours >= numLiveNeighbours
+                                         && cornerCell.NumNonNeighbours >= numLiveNonNeighbours;
+            if (cornerCellCanBeTested)
             {
                 TestParticularCellPosition(
                     numLiveNeighbours,
+                    numLiveNonNeighbours,
                     cornerCell,
                     successJudger);
             }
 
             GamePosition edgeCell = GetEdgeCell();
-            if (edgeCell.NumNeighbours >= numLiveNeighbours)
+            bool edgeCellCanBeTested = edgeCell.NumNeighbours >= numLiveNeighbours
+                                       && edgeCell.NumNonNeighbours >= numLiveNonNeighbours;
+            if (edgeCellCanBeTested)
             {
                 TestParticularCellPosition(
                     numLiveNeighbours,
+                    numLiveNonNeighbours,
                     edgeCell,
                     successJudger);
             }
 
-            TestParticularCellPosition(
-                numLiveNeighbours,
-                GetCentreCell(),
-                successJudger);
+            GamePosition centreCell = GetCentreCell();
+            bool centreCellCanBeTested = centreCell.NumNonNeighbours >= numLiveNonNeighbours;
+            if (centreCellCanBeTested)
+            {
+                TestParticularCellPosition(
+                    numLiveNeighbours,
+                    numLiveNonNeighbours,
+                    centreCell,
+                    successJudger);
+            }
+
+            if (!(cornerCellCanBeTested && edgeCellCanBeTested && centreCellCanBeTested))
+            {
+                throw new Exception(
+                    string.Format("This test is not possible due to specified number of live neighbours and live non-neighbours! Live neightbours: {0}, Live non-neighbours: {1}",
+                    numLiveNeighbours,
+                    numLiveNonNeighbours
+                    ));
+            }
         }
 
         private void TestParticularCellPosition(
             int numLiveNeighbours,
+            int numLiveNonNeighbours,
             GamePosition gamePosition,
             Action successJudger)
         {
@@ -137,11 +185,24 @@ namespace GameOfLife.Tests
             {
                 AddLiveNeighbours(numLiveNeighbours, gamePosition);
             }
+
             int numDeadNeighbours = gamePosition.NumNeighbours - numLiveNeighbours;
             if (numDeadNeighbours > 0)
             {
                 AddDeadNeighbours(numDeadNeighbours, gamePosition);
             }
+
+            if (numLiveNonNeighbours > 0)
+            {
+                AddLiveNonNeighbours(numLiveNonNeighbours, gamePosition);
+            }
+
+            int numDeadNonNeighbours = gamePosition.NumNonNeighbours - numLiveNonNeighbours;
+            if (numDeadNonNeighbours > 0)
+            {
+                AddDeadNonNeighbours(numDeadNonNeighbours, gamePosition);
+            }
+            
             Grid grid = new Grid(_cells);
 
             grid.Evolve();
@@ -156,9 +217,10 @@ namespace GameOfLife.Tests
             int yCoordinate = _gridHeight - 1;
 
             return new GamePosition
+                (new Point(xCoordinate, yCoordinate),
+                _gridWidth,
+                _gridHeight)
             {
-                Position = new Point(xCoordinate,
-                                    yCoordinate),
                 Neighbours = new List<Point>
                 {
                     AboveAndToTheLeft(xCoordinate, yCoordinate),
@@ -184,9 +246,10 @@ namespace GameOfLife.Tests
             int yCoordinate = _gridHeight >= 4 ? _gridHeight - 3 : _gridHeight - 2;
 
             return new GamePosition
+                (new Point(xCoordinate, yCoordinate),
+                _gridWidth,
+                _gridHeight)
             {
-                Position = new Point(xCoordinate,
-                                    yCoordinate),
                 Neighbours = new List<Point>
                 {
                     AboveAndToTheLeft(xCoordinate, yCoordinate),
@@ -204,9 +267,10 @@ namespace GameOfLife.Tests
             int yCoordinate = _gridHeight - 1;
 
             return new GamePosition
+                (new Point(xCoordinate, yCoordinate),
+                _gridWidth,
+                _gridHeight)
             {
-                Position = new Point(xCoordinate,
-                                    yCoordinate),
                 Neighbours = new List<Point>
                 {
                     AboveAndToTheLeft(xCoordinate, yCoordinate),
@@ -229,8 +293,10 @@ namespace GameOfLife.Tests
             int yCoordinate = _gridHeight >= 4 ? _gridHeight - 3 : _gridHeight - 2;
 
             return new GamePosition
+                (new Point(xCoordinate, yCoordinate),
+                _gridWidth,
+                _gridHeight)
             {
-                Position = new Point(_gridWidth - 2, _gridHeight - 2),
                 Neighbours = new List<Point>
                 {
                     AboveAndToTheLeft(xCoordinate, yCoordinate),

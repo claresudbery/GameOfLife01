@@ -174,5 +174,15 @@ namespace GameOfLife.Tests
                 numLiveNeighbours: 8,
                 successJudger: CellShouldStayDead);
         }
+
+        [TestMethod]
+        public void GivenALiveCellWithAllDeadNeighboursAndThreeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
+        {
+            _survivalState = Survival.Alive;
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 0,
+                successJudger: CellShouldDie,
+                numLiveNonNeighbours: 3);
+        }
     }
 }
