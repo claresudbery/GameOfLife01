@@ -227,5 +227,28 @@ namespace GameOfLife.Tests
                 successJudger: CellShouldStayDead,
                 numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
         }
+
+        [TestMethod]
+        public void WhenGridReturnsCellsInOrder_ThenNumberOfCellsShouldBeCorrect()
+        {
+            var cells = new List<ICell>
+            {
+                new Cell(Survival.Alive, 0, 0),
+                new Cell(Survival.Alive, 0, 1),
+                new Cell(Survival.Alive, 1, 0),
+                new Cell(Survival.Alive, 1, 1)
+            };
+
+            var grid = new Grid(cells);
+            var cellsInOrder = grid.GetCellsInOrder();
+
+            var numReturnedCells = 0;
+            for (int rowIndex = 0; rowIndex < cellsInOrder.Length; rowIndex++)
+            {
+                numReturnedCells += cellsInOrder[rowIndex].Length;
+            }
+
+            Assert.AreEqual(numReturnedCells, cells.Count, "Number of cells in order should be same as number of cells passed to grid.");
+        }
     }
 }
