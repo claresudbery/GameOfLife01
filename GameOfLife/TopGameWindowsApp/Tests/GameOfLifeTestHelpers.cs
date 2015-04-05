@@ -126,6 +126,11 @@ namespace GameOfLife.Tests
             Action successJudger,
             int numLiveNonNeighbours = 0)
         {
+            if (0 == numLiveNonNeighbours)
+            {
+                numLiveNonNeighbours = CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours);
+            }
+
             GamePosition cornerCell = GetCornerCell();
             bool cornerCellCanBeTested = cornerCell.NumNeighbours >= numLiveNeighbours
                                          && cornerCell.NumNonNeighbours >= numLiveNonNeighbours;
@@ -161,7 +166,7 @@ namespace GameOfLife.Tests
                     successJudger);
             }
 
-            if (!(cornerCellCanBeTested && edgeCellCanBeTested && centreCellCanBeTested))
+            if (!cornerCellCanBeTested && !edgeCellCanBeTested && !centreCellCanBeTested)
             {
                 throw new Exception(
                     string.Format("This test is not possible due to specified number of live neighbours and live non-neighbours! Live neightbours: {0}, Live non-neighbours: {1}",
@@ -169,6 +174,19 @@ namespace GameOfLife.Tests
                     numLiveNonNeighbours
                     ));
             }
+        }
+
+        /// <summary>
+        /// Return a number specifying how many live non-neighbours there should be 
+        /// The aim is to ensure that the total number of live cells is most likely to break the test (and therefore highlight logical errors).
+        /// If the test specifies three live neighbours, we want more than three live cells in total.
+        /// Otherwise we want three live cells in total, because three is the magic number that makes things happen.
+        /// </summary>
+        /// <param name="numLiveNeighbours"></param>
+        /// <returns></returns>
+        private int CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(int numLiveNeighbours)
+        {
+            return (numLiveNeighbours >= 3) ? 2 : (3 - numLiveNeighbours);
         }
 
         private void TestParticularCellPosition(
@@ -192,15 +210,15 @@ namespace GameOfLife.Tests
                 AddDeadNeighbours(numDeadNeighbours, gamePosition);
             }
 
-            if (numLiveNonNeighbours > 0)
-            {
-                AddLiveNonNeighbours(numLiveNonNeighbours, gamePosition);
-            }
-
             int numDeadNonNeighbours = gamePosition.NumNonNeighbours - numLiveNonNeighbours;
             if (numDeadNonNeighbours > 0)
             {
                 AddDeadNonNeighbours(numDeadNonNeighbours, gamePosition);
+            }
+
+            if (numLiveNonNeighbours > 0)
+            {
+                AddLiveNonNeighbours(numLiveNonNeighbours, gamePosition);
             }
             
             Grid grid = new Grid(_cells);
