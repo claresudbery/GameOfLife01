@@ -239,8 +239,8 @@ namespace GameOfLife.Tests
                 new Cell(Survival.Alive, 1, 1)
             };
 
-            var grid = new Grid(cells);
-            var cellsInOrder = grid.GetCellsInOrder();
+            _grid = new Grid(cells);
+            var cellsInOrder = _grid.GetCellsInOrder();
 
             var numReturnedCells = 0;
             for (int rowIndex = 0; rowIndex < cellsInOrder.Length; rowIndex++)
@@ -326,11 +326,11 @@ namespace GameOfLife.Tests
             AddNeighbours(liveNeighbours, Survival.Alive);
             AddNeighbours(deadNeighbours, Survival.Dead);
 
-            var grid = new Grid(_cells);
-            grid.Evolve();
+            _grid = new Grid(_cells);
+            _grid.Evolve();
 
-            ICell firstTestCellAfterEvolution = grid.GetCell(firstTestCell.XCoordinate(), firstTestCell.YCoordinate());
-            ICell secondTestCellAfterEvolution = grid.GetCell(firstTestCell.XCoordinate(), firstTestCell.YCoordinate());
+            ICell firstTestCellAfterEvolution = _grid.GetCell(firstTestCell.XCoordinate(), firstTestCell.YCoordinate());
+            ICell secondTestCellAfterEvolution = _grid.GetCell(firstTestCell.XCoordinate(), firstTestCell.YCoordinate());
 
             Assert.IsFalse(firstTestCellAfterEvolution.IsAlive(), "First test cell should have died.");
             Assert.IsFalse(secondTestCellAfterEvolution.IsAlive(), "Second test cell should have died.");

@@ -18,6 +18,7 @@ namespace GameOfLife.Tests
         private int _xCoordinate;
         private int _yCoordinate;
         private IList<ICell> _cells;
+        private Grid _grid;
         private int _gridWidth = 8;
         private int _gridHeight = 4;
         private const int NumCornerNeighbours = 3;
@@ -55,24 +56,29 @@ namespace GameOfLife.Tests
             _cells = new List<ICell>();
         }
 
+        private ICell TestCellAfterEvolution()
+        {
+            return _grid.GetCell(XCoordinate(), YCoordinate());
+        }
+
         private void CellShouldDie()
         {
-            Assert.IsTrue(_dieHasBeenCalled, "Die() was not called, but should have been.");
+            Assert.IsFalse(TestCellAfterEvolution().IsAlive(), "Cell is alive when it shouldn't be.");
         }
 
         private void CellShouldSurvive()
         {
-            Assert.IsFalse(_dieHasBeenCalled, "Die() was called when it shouldn't have been.");
+            Assert.IsTrue(TestCellAfterEvolution().IsAlive(), "Cell is not alive when it should be.");
         }
 
         private void CellShouldStayDead()
         {
-            Assert.IsFalse(_liveHasBeenCalled, "Live() was called, but shouldn't have been.");
+            Assert.IsFalse(TestCellAfterEvolution().IsAlive(), "Cell is alive when it shouldn't be.");
         }
 
         private void CellShouldRegenerate()
         {
-            Assert.IsTrue(_liveHasBeenCalled, "Live() was not called, but should have been.");
+            Assert.IsTrue(TestCellAfterEvolution().IsAlive(), "Cell is not alive when it should be.");
         }
 
         private void AddDeadNeighbours(int numNeighbours, GamePosition gamePosition)
@@ -226,9 +232,9 @@ namespace GameOfLife.Tests
                 AddLiveNonNeighbours(numLiveNonNeighbours, gamePosition);
             }
             
-            Grid grid = new Grid(_cells);
+            _grid = new Grid(_cells);
 
-            grid.Evolve();
+            _grid.Evolve();
 
             successJudger();
             _cells.Clear();
