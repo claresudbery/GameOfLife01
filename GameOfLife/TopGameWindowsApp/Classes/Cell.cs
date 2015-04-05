@@ -16,6 +16,13 @@
             _yCoordinate = yCoordinate;
         }
 
+        public Cell(ICell cellToCopy)
+        {
+            _survivalState = cellToCopy.IsAlive() ? Survival.Alive : Survival.Dead;
+            _xCoordinate = cellToCopy.XCoordinate();
+            _yCoordinate = cellToCopy.YCoordinate();
+        }
+
         public void Die()
         {
             _survivalState = Survival.Dead;

@@ -26,25 +26,34 @@ namespace GameOfLife.Classes
 
         public void Evolve()
         {
+            var newCells = new List<ICell>();
+            ICell tempCell;
+
             foreach(var cell in cells)
             {
+                tempCell = new Cell(cell);
+
                 int numLiveNeighbours = NumLiveNeighbours(cell);
                 if (3 == numLiveNeighbours)
                 {
-                    cell.Live();
+                    tempCell.Live();
                 }
                 else
                 {
                     if (2 == numLiveNeighbours && cell.IsAlive())
                     {
-                        cell.Live();
+                        tempCell.Live();
                     }
                     else
                     {
-                        cell.Die();
+                        tempCell.Die();
                     }
                 }
+
+                newCells.Add(tempCell);
             }
+
+            cells = newCells;
         }
 
         private bool CellsAreTheSame (ICell firstCell, ICell secondCell)
@@ -71,6 +80,13 @@ namespace GameOfLife.Classes
                 cell.IsAlive()
                 && CellsAreNeighbours(cell, candidateCell)
                 && !CellsAreTheSame(cell, candidateCell));
+        }
+
+        public ICell GetCell(int xCoordinate, int yCoordinate)
+        {
+            return cells.First(
+                cell => cell.XCoordinate() == xCoordinate
+                        && cell.YCoordinate() == yCoordinate);
         }
     }
 }

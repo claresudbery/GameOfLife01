@@ -327,9 +327,13 @@ namespace GameOfLife.Tests
             AddNeighbours(deadNeighbours, Survival.Dead);
 
             var grid = new Grid(_cells);
+            grid.Evolve();
 
-            Assert.IsFalse(firstTestCell.IsAlive(), "First test cell should have died.");
-            Assert.IsFalse(secondTestCell.IsAlive(), "Second test cell should have died.");
+            ICell firstTestCellAfterEvolution = grid.GetCell(firstTestCell.XCoordinate(), firstTestCell.YCoordinate());
+            ICell secondTestCellAfterEvolution = grid.GetCell(firstTestCell.XCoordinate(), firstTestCell.YCoordinate());
+
+            Assert.IsFalse(firstTestCellAfterEvolution.IsAlive(), "First test cell should have died.");
+            Assert.IsFalse(secondTestCellAfterEvolution.IsAlive(), "Second test cell should have died.");
         }
     }
 }
