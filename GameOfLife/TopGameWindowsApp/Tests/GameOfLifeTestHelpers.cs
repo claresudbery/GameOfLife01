@@ -98,6 +98,16 @@ namespace GameOfLife.Tests
             }
         }
 
+        private void AddNeighbours(
+            IEnumerable<Point> neighbours,
+            Survival survivalState)
+        {
+            foreach (var neighbour in neighbours)
+            {
+                _cells.Add(new Cell(survivalState, neighbour.X, neighbour.Y));
+            }
+        }
+
         private void AddDeadNonNeighbours(int numNonNeighbours, GamePosition gamePosition)
         {
             AddNonNeighbours(numNonNeighbours, Survival.Dead, gamePosition);

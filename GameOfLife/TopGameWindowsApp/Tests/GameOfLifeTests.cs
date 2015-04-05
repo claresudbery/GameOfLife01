@@ -290,5 +290,46 @@ namespace GameOfLife.Tests
 
             Assert.IsTrue(cell.IsAlive(), "Cell should still be alive.");
         }
+
+        [TestMethod]
+        public void GivenTwoAdjacentLiveCellsWithFourLiveNeighboursEach_WhenGameEvolves_ThenBothCellsShouldDie()
+        {
+            const int firstCellXCoordinate = 1;
+            const int firstCellYCoordinate = 1;
+            var firstTestCell = new Cell(Survival.Alive, firstCellXCoordinate, firstCellYCoordinate);
+
+            const int secondCellXCoordinate = 2;
+            const int secondCellYCoordinate = 1;
+            var secondTestCell = new Cell(Survival.Alive, secondCellXCoordinate, secondCellYCoordinate);
+
+            _cells.Add(firstTestCell);
+            _cells.Add(secondTestCell);
+
+            var liveNeighbours = new List<Point>
+            {
+                DirectlyAbove(firstCellXCoordinate, firstCellYCoordinate),
+                DirectlyAbove(secondCellXCoordinate, secondCellYCoordinate),
+                DirectlyBelow(firstCellXCoordinate, firstCellYCoordinate),
+            };
+
+            var deadNeighbours = new List<Point>
+            {
+                AboveAndToTheLeft(firstCellXCoordinate, firstCellYCoordinate),
+                DirectlyToTheLeft(firstCellXCoordinate, firstCellYCoordinate),
+                BelowAndToTheLeft(firstCellXCoordinate, firstCellYCoordinate),
+                AboveAndToTheRight(secondCellXCoordinate, secondCellYCoordinate),
+                DirectlyToTheRight(secondCellXCoordinate, secondCellYCoordinate),
+                BelowAndToTheRight(secondCellXCoordinate, secondCellYCoordinate),
+                DirectlyBelow(secondCellXCoordinate, secondCellYCoordinate),
+            };
+
+            AddNeighbours(liveNeighbours, Survival.Alive);
+            AddNeighbours(deadNeighbours, Survival.Dead);
+
+            var grid = new Grid(_cells);
+
+            Assert.IsFalse(firstTestCell.IsAlive(), "First test cell should have died.");
+            Assert.IsFalse(secondTestCell.IsAlive(), "Second test cell should have died.");
+        }
     }
 }
