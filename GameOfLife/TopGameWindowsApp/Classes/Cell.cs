@@ -18,7 +18,7 @@
 
         public void Die()
         {
-            _survivalState = Survival.Alive;
+            _survivalState = Survival.Dead;
         }
 
         public void Live()
