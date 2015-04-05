@@ -62,7 +62,7 @@
     <Compile Include="Classes\Cell.cs" />
     <Compile Include="Classes\GamePosition.cs" />
     <Compile Include="Classes\ICell.cs" />
-    <Compile Include="Classes\Grid.cs" />
+    <Compile Include="Classes\GameOfLifeGrid.cs" />
     <Compile Include="Classes\Survival.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -18,7 +18,7 @@ namespace GameOfLife.Tests
         private int _xCoordinate;
         private int _yCoordinate;
         private IList<ICell> _cells;
-        private Grid _grid;
+        private GameOfLifeGrid _gameOfLifeGrid;
         private int _gridWidth = 8;
         private int _gridHeight = 4;
         private const int NumCornerNeighbours = 3;
@@ -58,7 +58,7 @@ namespace GameOfLife.Tests
 
         private ICell TestCellAfterEvolution()
         {
-            return _grid.GetCell(XCoordinate(), YCoordinate());
+            return _gameOfLifeGrid.GetCell(XCoordinate(), YCoordinate());
         }
 
         private void CellShouldDie()
@@ -232,9 +232,9 @@ namespace GameOfLife.Tests
                 AddLiveNonNeighbours(numLiveNonNeighbours, gamePosition);
             }
             
-            _grid = new Grid(_cells);
+            _gameOfLifeGrid = new GameOfLifeGrid(_cells);
 
-            _grid.Evolve();
+            _gameOfLifeGrid.Evolve();
 
             successJudger();
             _cells.Clear();

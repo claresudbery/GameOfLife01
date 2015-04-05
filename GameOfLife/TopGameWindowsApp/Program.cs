@@ -13,7 +13,7 @@ namespace GameOfLife
             int gridWidth = 8;
             int gridHeight = 4;
             IList<ICell> cells = CreateCells(gridWidth, gridHeight);
-            var grid = new Grid(cells);
+            var grid = new GameOfLifeGrid(cells);
 
             ShowContentsOfGrid(grid); 
             Console.WriteLine("Above is a brand new grid, which has not yet evolved.");
@@ -47,9 +47,9 @@ namespace GameOfLife
             return cells;
         }
 
-        private static void ShowContentsOfGrid(Grid grid)
+        private static void ShowContentsOfGrid(GameOfLifeGrid gameOfLifeGrid)
         {
-            var gridContents = grid.GetCellsInOrder();
+            var gridContents = gameOfLifeGrid.GetCellsInOrder();
 
             for (int rowIndex = 0; rowIndex < gridContents.Length; rowIndex++)
             {

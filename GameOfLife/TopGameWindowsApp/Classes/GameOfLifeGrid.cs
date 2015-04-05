@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace GameOfLife.Classes
 {
-    public class Grid
+    public class GameOfLifeGrid
     {
         private IList<ICell> cells;
 
-        public Grid(IList<ICell> cells)
+        public GameOfLifeGrid(IList<ICell> cells)
         {
             this.cells = cells;
         }
