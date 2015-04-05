@@ -12,6 +12,11 @@ namespace GameOfLife.Classes
             this.cells = cells;
         }
 
+        public char[][] GetCellsInOrder()
+        {
+            return new[] {new[] {'X'}};
+        }
+
         public void Evolve()
         {
             foreach(var cell in cells)
