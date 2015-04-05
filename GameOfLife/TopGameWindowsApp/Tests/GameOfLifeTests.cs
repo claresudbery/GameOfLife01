@@ -250,5 +250,15 @@ namespace GameOfLife.Tests
 
             Assert.AreEqual(numReturnedCells, cells.Count, "Number of cells in order should be same as number of cells passed to grid.");
         }
+
+        [TestMethod]
+        public void GivenLiveCell_WhenDieIsCalled_ThenCellDies()
+        {
+            var cell = new Cell(Survival.Alive, 0, 0);
+
+            cell.Die();
+
+            Assert.IsFalse(cell.IsAlive(), "Cell should not be alive.");
+        }
     }
 }

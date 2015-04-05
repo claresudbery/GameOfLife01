@@ -2,7 +2,7 @@
 {
     public class Cell : ICell
     {
-        private readonly Survival _survivalState;
+        private Survival _survivalState;
         private readonly int _xCoordinate;
         private readonly int _yCoordinate;
 
@@ -18,6 +18,7 @@
 
         public void Die()
         {
+            _survivalState = Survival.Dead;
         }
 
         public void Live()
