@@ -41,9 +41,24 @@ namespace GameOfLife.Classes
                     && firstCell.YCoordinate() == secondCell.YCoordinate());
         }
 
+        private bool CellsAreNeighbours(ICell firstCell, ICell secondCell)
+        {
+            return (CoordinatesAreEqualOrAdjacent(firstCell.XCoordinate(), secondCell.XCoordinate())
+                    && CoordinatesAreEqualOrAdjacent(firstCell.YCoordinate(), secondCell.YCoordinate()));
+        }
+
+        private bool CoordinatesAreEqualOrAdjacent(int firstCoordinate, int secondCoordinate)
+        {
+            return firstCoordinate <= secondCoordinate + 1
+                    && firstCoordinate >= secondCoordinate - 1;
+        }
+
         private int NumLiveNeighbours(ICell candidateCell)
         {
-            return cells.Count(cell => !CellsAreTheSame(cell, candidateCell) && cell.IsAlive());
+            return cells.Count(cell =>  
+                cell.IsAlive()
+                && CellsAreNeighbours(cell, candidateCell)
+                && !CellsAreTheSame(cell, candidateCell));
         }
     }
 }
