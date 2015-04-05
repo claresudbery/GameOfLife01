@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GameOfLife.Classes
@@ -14,7 +15,13 @@ namespace GameOfLife.Classes
 
         public char[][] GetCellsInOrder()
         {
-            return new[] {new[] {'X'}};
+            return cells
+                .GroupBy(cell => cell.YCoordinate())
+                .Select(row => row
+                    .OrderBy(cell => cell.XCoordinate())
+                    .Select(x => x.IsAlive() ? 'X' : 'o')
+                    .ToArray())
+                .ToArray();
         }
 
         public void Evolve()
