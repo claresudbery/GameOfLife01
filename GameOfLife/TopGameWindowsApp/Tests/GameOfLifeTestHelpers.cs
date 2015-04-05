@@ -124,13 +124,8 @@ namespace GameOfLife.Tests
         private void TestAllTypesOfCellPosition(
             int numLiveNeighbours,
             Action successJudger,
-            int numLiveNonNeighbours = 0)
+            int numLiveNonNeighbours)
         {
-            if (0 == numLiveNonNeighbours)
-            {
-                numLiveNonNeighbours = CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours);
-            }
-
             GamePosition cornerCell = GetCornerCell();
             bool cornerCellCanBeTested = cornerCell.NumNeighbours >= numLiveNeighbours
                                          && cornerCell.NumNonNeighbours >= numLiveNonNeighbours;

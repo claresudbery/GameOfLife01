@@ -14,175 +14,218 @@ namespace GameOfLife.Tests
     public partial class GameOfLifeTests : ICell
     {
         [TestMethod]
-        public void GivenALiveCellWithAllDeadNeighbours_WhenGameEvolves_ThenCellDies()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 0,
-                successJudger: CellShouldDie);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithOneLiveNeighbourAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 1,
-                successJudger: CellShouldDie);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithTwoLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellSurvives()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 2,
-                successJudger: CellShouldSurvive);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithThreeLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellSurvives()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 3,
-                successJudger: CellShouldSurvive);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithFourLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 4,
-                successJudger: CellShouldDie);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithFiveLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 5,
-                successJudger: CellShouldDie);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithSixLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 6,
-                successJudger: CellShouldDie);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithSevenLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 7,
-                successJudger: CellShouldDie);
-        }
-
-        [TestMethod]
-        public void GivenALiveCellWithEightLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellDies()
-        {
-            _survivalState = Survival.Alive;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 8,
-                successJudger: CellShouldDie);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithAllDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 0,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithOneLiveNeighbourAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 1,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithTwoLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 2,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithThreeLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellRegenerates()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 3,
-                successJudger: CellShouldRegenerate);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithFourLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 4,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithFiveLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 5,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithSixLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 6,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithSevenLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 7,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
-        public void GivenADeadCellWithEightLiveNeighboursAndTheRestAreDeadNeighbours_WhenGameEvolves_ThenCellIsStillDead()
-        {
-            _survivalState = Survival.Dead;
-            TestAllTypesOfCellPosition(
-                numLiveNeighbours: 8,
-                successJudger: CellShouldStayDead);
-        }
-
-        [TestMethod]
         public void GivenALiveCellWithAllDeadNeighboursAndThreeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
         {
             _survivalState = Survival.Alive;
+
             TestAllTypesOfCellPosition(
                 numLiveNeighbours: 0,
                 successJudger: CellShouldDie,
                 numLiveNonNeighbours: 3);
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithOneLiveNeighbourAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 1;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 1,
+                successJudger: CellShouldDie,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithTwoLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellSurvives()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 2;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 2,
+                successJudger: CellShouldSurvive,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithThreeLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellSurvives()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 3;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 3,
+                successJudger: CellShouldSurvive,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithFourLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 4;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 4,
+                successJudger: CellShouldDie,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithFiveLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 5;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 5,
+                successJudger: CellShouldDie,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithSixLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 6;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 6,
+                successJudger: CellShouldDie,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithSevenLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 7;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 7,
+                successJudger: CellShouldDie,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenALiveCellWithEightLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellDies()
+        {
+            _survivalState = Survival.Alive;
+            const int numLiveNeighbours = 8;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 8,
+                successJudger: CellShouldDie,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithAllDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 0;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 0,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithOneLiveNeighbourAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 1;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 1,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithTwoLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 2;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 2,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithThreeLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellRegenerates()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 3;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 3,
+                successJudger: CellShouldRegenerate,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithFourLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 4;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 4,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithFiveLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 5;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 5,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithSixLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 6;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 6,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithSevenLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 7;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 7,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
+        }
+
+        [TestMethod]
+        public void GivenADeadCellWithEightLiveNeighboursAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellIsStillDead()
+        {
+            _survivalState = Survival.Dead;
+            const int numLiveNeighbours = 8;
+
+            TestAllTypesOfCellPosition(
+                numLiveNeighbours: 8,
+                successJudger: CellShouldStayDead,
+                numLiveNonNeighbours: CalculateNumberOfNonLiveNonNeighboursMostLikelyToBreakTest(numLiveNeighbours));
         }
     }
 }
