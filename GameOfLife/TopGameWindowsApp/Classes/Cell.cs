@@ -23,7 +23,7 @@
 
         public void Live()
         {
-            _survivalState = Survival.Alive;
+            _survivalState = Survival.Dead;
         }
 
         public bool IsAlive()

@@ -280,5 +280,15 @@ namespace GameOfLife.Tests
 
             Assert.IsTrue(cell.IsAlive(), "Cell should be alive.");
         }
+
+        [TestMethod]
+        public void GivenLiveCell_WhenLiveIsCalled_ThenCellIsStillAlive()
+        {
+            var cell = new Cell(Survival.Alive, 0, 0);
+
+            cell.Live();
+
+            Assert.IsTrue(cell.IsAlive(), "Cell should still be alive.");
+        }
     }
 }
