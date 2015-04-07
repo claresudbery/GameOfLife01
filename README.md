@@ -47,3 +47,15 @@ Then I realised I wanted to check this test would pass whether my cell was on th
 Then I decided that the non-neighbours were also important, and the test became GivenALiveCellWithOneLiveNeighbourAndTheRestAreDeadNeighboursAndSomeLiveNonNeighbours_WhenGameEvolves_ThenCellDies. 
 
 Obviously what I could have done was write a new test each time, but the same conditions would apply to all tests – and I wanted to check those extra conditions for all tests – so I could have ended up with an enormous number of tests. Instead, I stuck with the one test – which was testing the one thing: when a live cell has one live neighbour, it should die. But I am also specifying all the other things which should also be true when a live cell has one live neighbour – and if these things are not included in the test, then you are testing a scenario which will never actually happen (in isolation) in a grid of any decent size. 
+
+7) But what about the efficiency?
+
+I'd like to run some tests on the Big O complexity of using a list of cells and running Linq queries to find neighbours etc, and then converting the list at the last minute into a simple 2-dimensional character array, versus just maintaining a 2-dimensional character-array (or a bool array which is converted to characters for display purposes) from the start. Then again, there's a reason I called this GameOfLife01 - in theory I'd like to keep repeating the kata from scratch, using different approaches each time.
+
+8) Front end tests?
+
+There's currently nothing to test the actual output on the screen.
+
+9) Animation? 
+
+It would be nice to produce a more sophisticated output which allowed you to see the game evolve in front of your eyes, rather than only being able to view one evolution at a time.
