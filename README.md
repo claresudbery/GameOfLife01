@@ -7,23 +7,23 @@ which I could not justify.
 
 Actually, many interesting things came out of it:
 
-The limitations of self-shunt:
+1) The limitations of self-shunt:
 
 As mentioned above, I started out using self shunt, but it fell at the last hurdle because the Grid class created copies of each cell (to avoid making changes to neighbouring cells before their neighbours had a chance to evaluate what their next state should be) – which meant that the test cell was no longer being operated on.
 There were ways round this – for instance creating a temp copy of the whole grid and then finding the corresponding entries in the original – but this was less neat and would have meant I was contorting the code for the sake of the test.
 
-The danger of checking actions only, and never state:
+2) The danger of checking actions only, and never state:
 
 Because I was testing actions rather than state (which seems to be part of the point of self-shunt?), I only ever tested that Live() and Die() were called, rather than testing the results of those calls. 
 The result of this was that although all my tests were passing, when I actually ran the code in a console app, I was mystified to see that all my cells were permanently alive (I started with a grid where all cells were alive).
 The reason for this turned out to be that I had never actually implemented Live() and Die() in my GameOfLifeGrid class!
 
-Don't forget to run the code!
+3) Don't forget to run the code!
 
 It wasn’t until I actually ran the code in a simple console app that I spotted one particular problem (for which the solution was to copy all the cells, hence invalidating self-shunt): You can’t loop through the cells, altering the state of each one as you go – this will pollute the state of the surrounding cells, resulting in incorrect results. Luckily I am quite anal, and manually checked the state of every single cell when I ran the code. :)
 Obviously I should have thought of this problem in advance, but I didn't. Sometimes you just need to rin the damn code. Which is bloody obvious, but when "playing" with TDD in the context of a kata, you can sometimes forget this.
 
-Can Self-Shunt
+4) Can Self-Shunt cause problems when the test has to implement methods it shouldn't care about?
 
 When I was still using self-shunt, I found myself potentially having to re-implement certain key methods on ICell within my test class. For instance, I wanted to add an ICell method which would allow you to discover whether two cells were neighbours or not. 
 This method would then have to be implemented within my test (which implemented the ICell interface): My test cell would have to inform the grid whether other cells were its neighbours or not. 
@@ -32,13 +32,13 @@ The solution in the end was to place the method somewhere else: I put it in the 
 But although that was probably a more correct approach than to put the method on the ICell interface, the *reason* I did it was to avoid having to put logic in my test class. This worries me. 
 I suspect I am misunderstanding how self-shunt should be used, but I know I have also spotted this problem whilst writing self-shunt tests in a production environment (note to self: Do some research to remind self why self-shunt is a good thing - maybe it depends on context?).
 
-Tests Which Contain Logic
+5) Tests Which Contain Logic
 
 Speaking of logic in the test class... I hate repetition. I am a big proponent of DRY (Don’t Repeat Yourself). Therefore, in order to avoid repeating the same test-setup logic over and over, I ended up writing a lot of logic into the tests themselves (see GameOfLifeTestHelpers.cs). 
 This resulted in some lovely code, but I know there’s an argument to avoid having too much logic in the tests – otherwise you want tests that test the tests! 
 However, the alternative would be to either have less test coverage or millions of almost-exactly-the-same tests, which I think would lead to even more problems due to the impossiblity of either reading or maintaining them. Also, you can check your test logic is correct by deliberately forcing the tests to fail (in meaningful ways).
 
-Adding Stuff To Already-Written Tests
+6) Adding Stuff To Already-Written Tests
 
 I found that I was writing a simple test and then going back to extend it, when I noticed other similar scenarios which needed testing. 
 For instance: I started out with a test called GivenALiveCellWithOneLiveNeighbour_WhenGameEvolves_ThenCellDies. 
